@@ -1,0 +1,97 @@
+2.1 - Introduction to Functions
+
+Vocabulary
+    function - a reusable sequence of statements designed to do a particular job
+
+    user-defined functions - functions that are written by the user
+
+    function call - an expression that tells the CPU to interrupt the current function and execute another
+    function
+
+    call - executes
+
+    caller - function initiating the function call
+
+    callee / called function - function being called
+
+    function body - where the statements that determine what your function does will go (usually in curly braces)
+
+
+    - functions are useful because they are reusable
+    - every executable program must have function named named
+    - as programs get longer, putting all code in main gets hard to manage
+    - functions make code modular and splits code into smaller chunks
+        - better to organize, test, and useful
+    - CPU "puts a bookmark" at current point of execution and then calls function named
+    - after the CPU returns back to bookmarked point and resumes
+
+    example 1:
+
+    returnType functionName()       // This is the function header (tells compiler about existence of function)
+
+    {
+        // This is the function body (tells the compiler what the function does)
+    }
+
+    - function name is the identifier
+    - parenthesis tell compiler that user is defining a function
+
+    example 2:
+
+    #include <iostream> // for std::cout
+
+    // Definition of user-defined function doPrint()
+    void doPrint() // doPrint() is the called function in this example
+    {
+        std::cout << "In doPrint()\n";
+    }  
+
+    // definition of function main()
+    int main()
+    {
+        std::cout << "Starting main()\n";
+        doPrint();                          // interrupts main() by making a function call to doPrint() where
+                                            // main is the caller
+        std::cout << "Ending main()\n";     // this statement is executed after doPrint() ends
+
+        return 0;
+    }
+
+Produces the following output:
+    Starting main()
+    In doPrint()
+    Ending main()
+
+Note: Nested functions are not supported
+    - you cannot define a function inside another function in C++
+
+Example 3(incorrect):
+#include <iostream>
+    int main ()
+    {
+        void foo()     // ERROR: this function is nested inside function main()
+        {
+            std::cout << "foo!\n"
+        }
+
+        foo();      // function call to foo()
+        return 0;
+    }
+
+Example 4(corrected):
+#include <iostream>
+
+void foo()              // no longer inside main, valid
+{
+    std::cout << "foo!\n";
+}
+
+int main()
+{
+    foo();
+    return 0;
+}
+    
+* "foo" is a meaningless word often used as placeholder for a function or variable when the name is 
+unimportant to the demonstration of concept (metasyntactic variable)
+* others include: "bar", "baz", and three letter words taht end in "oo" such as "goo", "moo", and "boo"

@@ -1,0 +1,80 @@
+2.2 - Function Return Values (Value-Returning Functions)
+
+Vocabulary
+    return type - the type taht is defined before the function's name detrmining what type of value will
+    be returned
+
+    return statement - indicates the specific value being returned to the caller
+
+    return value - the specific value returned from a function
+
+    returne by value - the process in which a value is returned to a function
+
+    status code - also known as exit code or return code, is the return value from main()
+
+    DRY - one of the central tenets of good programming which abbreviates for "Don't Repeat Yourself"
+
+
+Return Values
+    - when writing user-defined function, you determine whether your function will return value back to caller
+    - Two things are needed:
+        1) indicate what type of value will be returned (using return type)
+
+        2) use a return statement inside the function to indicate what specific value will be returned
+    - "void" as a return type indicates no value will be returned
+    - the function main() has a return type of "int"
+
+    note: return types are not printed unless caller sends them to the console via std::cout
+    ex: std::cout << returnNUM() << "\n"; vs. returnNUM();
+
+Revisiting main()
+    - the main function works by it being executed first by the operating system
+    - after that, statements are executed sequentially
+    - main() then returns an integer value (usually 0) and program ends
+    - value from main() used to indicate wheter program successfully ran
+
+Advanced Note:
+    - C++ standard only defines the meaning of 3 status codes: 0, EXIT_SUCCESS, and EXIT_FAILURE
+    - 0 and EXIT_SUCCESS both mean program ran successfully
+    - EXIT_FAILURE means program did not execute successfully
+    - EXIT_SUCCESS and EXIT_FAILURE are preprocessor macros defined in <cstlib> header
+
+    - if you want to maximize portability, you should only use these to indicate successful or unsuccessful
+    terminations
+
+A Value-Returning Function that Does Not Return a Value Will Produce Undefined Behavior
+    - a function must return a value of that type or undefined behavior will occur
+
+    example 1:
+
+    #include <iostream>
+
+    int getValueFromUserUB()        // this function returns an integer value
+    {
+        std::cout << "Enter an integer: ";
+        int input{};
+        std::cin >> input;
+
+        // note: no return statements
+    }
+
+    int main()
+    {
+        int num { getValueFromUserUB() };       // initialize num with the return value of getValueFromUserUB
+
+        std::cout << num << " doubled is: " << num * 2 << '\n';
+
+        return 0;
+    }
+
+    - modern compiler will generate a warning because the getValueFromUserUB is defined as returning int but no return statement
+    - most cases, compilers detect if you've forgotten to return value
+    - in complicated cases, compiler is not able to properly deternmine whether your funciton returns a value so don't rely on it
+
+Function Main will Implicitly return 0 If No Return Statement is Provided
+    - an exception to the rule above is the function main()
+    - stil, best practice is to explicitly return a value from main to show intent and consistency with other functions
+
+Functions Can Only Return a Single Value
+    - only a single value can be returned back to function caller when called
+    
